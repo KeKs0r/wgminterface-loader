@@ -17,10 +17,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3005 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch:css": "postcss src/tailwind.css -o src/index.css",
+    "watch": "chokidar \"./src/**/*.{js,jsx,ts,tsx}\" -c \"yarn watch:css\"",
+    "dev": "concurrently \"yarn watch\" \"yarn start\""
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +42,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^6.3.0",
+    "postcss": "^8.3.11",
+    "postcss-cli": "^9.0.1",
+    "tailwindcss": "^2.2.17"
   }
 }
