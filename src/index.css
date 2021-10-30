@@ -477,30 +477,6 @@ video {
 .relative {
 	position: relative;
 }
-.top-10 {
-	top: 2.5rem;
-}
-.left-\[24px\] {
-	left: 24px;
-}
-.top-28 {
-	top: 7rem;
-}
-.left-\[140px\] {
-	left: 140px;
-}
-.top-12 {
-	top: 3rem;
-}
-.left-\[74px\] {
-	left: 74px;
-}
-.top-16 {
-	top: 4rem;
-}
-.left-\[82px\] {
-	left: 82px;
-}
 .right-4 {
 	right: 1rem;
 }
@@ -549,17 +525,8 @@ video {
 .w-3 {
 	width: 0.75rem;
 }
-.w-\[300px\] {
-	width: 300px;
-}
-.w-20 {
-	width: 5rem;
-}
-.w-52 {
-	width: 13rem;
-}
-.w-48 {
-	width: 12rem;
+.w-72 {
+	width: 18rem;
 }
 .min-w-\[360px\] {
 	min-width: 360px;
@@ -666,6 +633,13 @@ video {
 }
 .ring-grey-700\/20 {
 	--tw-ring-color: rgba(48, 51, 58, 0.2);
+}
+.transition {
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
 }
 .hover\:bg-grey-700\/5:hover {
 	background-color: rgba(48, 51, 58, 0.05);

@@ -25,6 +25,7 @@ export function BrowserWindow({ children }: BrowserWindowProps) {
         <div className="rounded-full h-3 w-3 bg-yellow-300" />
         <div className="rounded-full h-3 w-3 bg-green-300" />
       </div>
+
       <div className={twMerge("h-[4px]", loading && "animated-gradient")} />
       {children}
     </div>

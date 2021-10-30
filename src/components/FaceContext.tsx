@@ -1,33 +1,42 @@
 import { useState, createContext, useContext } from "react";
+import { random } from "lodash";
 
-import Mouth1 from "../img/Mouth_01.png";
-import Mouth2 from "../img/Mouth_02.png";
-import Mouth3 from "../img/Mouth_03.png";
-import Mouth4 from "../img/Mouth_04.png";
+import Face_0_1_1 from "../img/faces/0_1_1.png";
+import Face_0_2_1 from "../img/faces/0_2_1.png";
+import Face_0_3_1 from "../img/faces/0_3_1.png";
+import Face_0_4_1 from "../img/faces/0_4_1.png";
 
-import Eyes1 from "../img/Eyes_01.png";
-import Eyes2 from "../img/Eyes_02.png";
-import Eyes3 from "../img/Eyes_03.png";
-import Glasses1 from "../img/Glasses_01.png";
+import Face_1_1_0 from "../img/faces/1_1_0.png";
+import Face_1_1_1 from "../img/faces/1_1_1.png";
+import Face_1_2_0 from "../img/faces/1_2_0.png";
+import Face_1_2_1 from "../img/faces/1_2_1.png";
+import Face_1_3_0 from "../img/faces/1_3_0.png";
+import Face_1_3_1 from "../img/faces/1_3_1.png";
+import Face_1_4_0 from "../img/faces/1_4_0.png";
+import Face_1_4_1 from "../img/faces/1_4_1.png";
 
-type Mouth = {
-  img: string;
-  imgClasses: string;
-};
-type Eyes = {
-  img: string;
-  imgClasses: string;
-};
-type Glasses = {
-  img: string;
-  imgClasses: string;
-};
+import Face_2_1_0 from "../img/faces/2_1_0.png";
+import Face_2_1_1 from "../img/faces/2_1_1.png";
+import Face_2_2_0 from "../img/faces/2_2_0.png";
+import Face_2_2_1 from "../img/faces/2_2_1.png";
+import Face_2_3_0 from "../img/faces/2_3_0.png";
+import Face_2_3_1 from "../img/faces/2_3_1.png";
+import Face_2_4_0 from "../img/faces/2_4_0.png";
+import Face_2_4_1 from "../img/faces/2_4_1.png";
+
+import Face_3_1_0 from "../img/faces/3_1_0.png";
+import Face_3_1_1 from "../img/faces/3_1_1.png";
+import Face_3_2_0 from "../img/faces/3_2_0.png";
+import Face_3_2_1 from "../img/faces/3_2_1.png";
+import Face_3_3_0 from "../img/faces/3_3_0.png";
+import Face_3_3_1 from "../img/faces/3_3_1.png";
+import Face_3_4_0 from "../img/faces/3_4_0.png";
+import Face_3_4_1 from "../img/faces/3_4_1.png";
+
 type FaceContextType = {
-  mouth: Mouth;
+  image: string;
   nextMouth(): void;
-  eye: Eyes;
   nextEye(): void;
-  glasses?: Glasses;
   toggleGlasses(): void;
   shuffle(): void;
   loading: boolean;
@@ -37,37 +46,31 @@ type FaceContextType = {
 const FaceContext = createContext<FaceContextType>(null as any);
 
 export function Provider({ children }: { children: React.ReactNode }) {
-  const [mouthIndex, setMouthIndex] = useState(0);
+  const [mouthIndex, setMouthIndex] = useState(1);
   const [eyeIndex, setEyeIndex] = useState(0);
   const [showGlasses, setShowGlasses] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const mouth = MOUTHS[mouthIndex];
-  const eye = EYES[eyeIndex];
-  const glasses = showGlasses
-    ? {
-        img: Glasses1,
-        imgClasses: "absolute w-[300px] top-10 left-[24px]",
-      }
-    : undefined;
+  const [loading, setLoading] = useState(true);
 
-  const nextMouth = () =>
-    setMouthIndex((v) => (v >= MOUTHS.length - 1 ? 0 : v + 1));
-  const nextEye = () => setEyeIndex((v) => (v >= EYES.length - 1 ? 0 : v + 1));
+  const nextMouth = () => setMouthIndex((v) => (v >= 4 ? 1 : v + 1));
+  const nextEye = () => setEyeIndex((v) => (v >= 3 ? 0 : v + 1));
   const toggleGlasses = () => setShowGlasses((t) => !t);
   const shuffle = () => {
-    nextEye();
-    nextMouth();
-    toggleGlasses();
+    const eye = random(0, 3, false);
+    const mouth = random(1, 4, false);
+    const glass = random(0, 1, false) ? true : false;
+    setEyeIndex(eye);
+    setMouthIndex(mouth);
+    setShowGlasses(glass);
   };
 
   const toggleLoading = () => setLoading((a) => !a);
 
+  const image = getImage(eyeIndex, mouthIndex, showGlasses || eyeIndex === 0);
+
   const value = {
-    mouth,
+    image,
     nextMouth,
-    eye,
     nextEye,
-    glasses,
     toggleGlasses,
     shuffle,
     loading,
@@ -80,38 +83,83 @@ export function useFaceContext() {
   return useContext(FaceContext);
 }
 
-const mouthClasses = "absolute w-20 top-28 left-[140px]";
+const IMAGE_MAP = {
+  0: {
+    1: {
+      1: Face_0_1_1,
+    },
+    2: {
+      1: Face_0_2_1,
+    },
+    3: {
+      1: Face_0_3_1,
+    },
+    4: {
+      1: Face_0_4_1,
+    },
+  },
+  1: {
+    1: {
+      0: Face_1_1_0,
+      1: Face_1_1_1,
+    },
+    2: {
+      0: Face_1_2_0,
+      1: Face_1_2_1,
+    },
+    3: {
+      0: Face_1_3_0,
+      1: Face_1_3_1,
+    },
+    4: {
+      0: Face_1_4_0,
+      1: Face_1_4_1,
+    },
+  },
+  2: {
+    1: {
+      0: Face_2_1_0,
+      1: Face_2_1_1,
+    },
+    2: {
+      0: Face_2_2_0,
+      1: Face_2_2_1,
+    },
+    3: {
+      0: Face_2_3_0,
+      1: Face_2_3_1,
+    },
+    4: {
+      0: Face_2_4_0,
+      1: Face_2_4_1,
+    },
+  },
+  3: {
+    1: {
+      0: Face_3_1_0,
+      1: Face_3_1_1,
+    },
+    2: {
+      0: Face_3_2_0,
+      1: Face_3_2_1,
+    },
+    3: {
+      0: Face_3_3_0,
+      1: Face_3_3_1,
+    },
+    4: {
+      0: Face_3_4_0,
+      1: Face_3_4_1,
+    },
+  },
+} as any;
 
-const MOUTHS: Mouth[] = [
-  {
-    img: Mouth1,
-    imgClasses: mouthClasses,
-  },
-  {
-    img: Mouth2,
-    imgClasses: mouthClasses,
-  },
-  {
-    img: Mouth3,
-    imgClasses: mouthClasses,
-  },
-  {
-    img: Mouth4,
-    imgClasses: mouthClasses,
-  },
-];
+function getImage(eye: number, mouth: number, glasses: boolean) {
+  const glassIndex = glasses ? 1 : 0;
 
-const EYES: Eyes[] = [
-  {
-    img: Eyes1,
-    imgClasses: "absolute w-52 top-12 left-[74px]",
-  },
-  {
-    img: Eyes2,
-    imgClasses: "absolute w-48 top-16 left-[82px]",
-  },
-  {
-    img: Eyes3,
-    imgClasses: "absolute w-52 top-12 left-[74px]",
-  },
-];
+  const image = IMAGE_MAP[eye]?.[mouth]?.[glassIndex];
+  if (!image) {
+    console.warn("Could not find", eye, mouth, glassIndex);
+  }
+  return image;
+}
