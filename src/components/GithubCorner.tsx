@@ -1,6 +1,6 @@
 export function GithubLink() {
   return (
-    <a href="#">
+    <a href="https://github.com/KeKs0r/wgminterface-loader">
       <GithubLogo />
     </a>
   );
