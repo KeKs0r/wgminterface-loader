@@ -605,6 +605,9 @@ video {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
+.p-1 {
+	padding: 0.25rem;
+}
 .p-4 {
 	padding: 1rem;
 }
