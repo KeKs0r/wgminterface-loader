@@ -46,9 +46,10 @@ type FaceContextType = {
 const FaceContext = createContext<FaceContextType>(null as any);
 
 export function Provider({ children }: { children: React.ReactNode }) {
+  const [eyeIndex, setEyeIndex] = useState(2);
   const [mouthIndex, setMouthIndex] = useState(1);
-  const [eyeIndex, setEyeIndex] = useState(0);
-  const [showGlasses, setShowGlasses] = useState(false);
+
+  const [showGlasses, setShowGlasses] = useState(true);
   const [loading, setLoading] = useState(true);
 
   const nextMouth = () => setMouthIndex((v) => (v >= 4 ? 1 : v + 1));
