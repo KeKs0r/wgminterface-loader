@@ -56,6 +56,17 @@ module.exports = {
       "grey.default.o80": "rgba(48, 51, 58, 0.8)",
       "grey.default.o100": "rgb(48, 51, 58)",
     },
+    fontFamiliy: {
+      emoji: [
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+        "Inter",
+        "system-ui",
+        "sans-serif",
+      ],
+    },
   },
   variants: {
     extend: {
