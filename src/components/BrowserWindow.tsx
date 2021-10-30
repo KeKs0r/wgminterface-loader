@@ -1,5 +1,5 @@
 import { useFaceContext } from "./FaceContext";
-import { twMerge } from "tailwind-merge";
+
 import "./gradient.css";
 
 interface BrowserWindowProps {
@@ -10,9 +10,7 @@ export function BrowserWindow({ children }: BrowserWindowProps) {
   const { loading } = useFaceContext();
   return (
     <div
-      className={twMerge(
-        "max-w-4xl w-full ring-1 ring-grey-700/20 rounded-xl min-h-[260px] min-w-[360px]"
-      )}
+      className="max-w-4xl w-full ring-1 ring-grey-700/20 rounded-xl min-h-[260px] min-w-[360px]"
       style={
         {
           "--tw-shadow":
@@ -26,7 +24,11 @@ export function BrowserWindow({ children }: BrowserWindowProps) {
         <div className="rounded-full h-3 w-3 bg-green-300" />
       </div>
 
-      <div className={twMerge("h-[4px]", loading && "animated-gradient")} />
+      <div
+        className={["h-[4px]", loading && "animated-gradient"]
+          .filter(Boolean)
+          .join(" ")}
+      />
       {children}
     </div>
   );
