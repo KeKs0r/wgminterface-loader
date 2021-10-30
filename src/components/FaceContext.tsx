@@ -55,12 +55,11 @@ export function Provider({ children }: { children: React.ReactNode }) {
   const nextMouth = () => setMouthIndex((v) => (v >= 4 ? 1 : v + 1));
   const nextEye = () => setEyeIndex((v) => (v >= 3 ? 0 : v + 1));
   const toggleGlasses = () => setShowGlasses((t) => !t);
+
   const shuffle = () => {
-    const eye = random(0, 3, false);
-    const mouth = random(1, 4, false);
+    setEyeIndex((v) => getRandomNumber(v, 0, 3));
+    setMouthIndex((v) => getRandomNumber(v, 1, 4));
     const glass = random(0, 1, false) ? true : false;
-    setEyeIndex(eye);
-    setMouthIndex(mouth);
     setShowGlasses(glass);
   };
 
@@ -163,4 +162,12 @@ function getImage(eye: number, mouth: number, glasses: boolean) {
     console.warn("Could not find", eye, mouth, glassIndex);
   }
   return image;
+}
+
+function getRandomNumber(current: number, min: number, max: number) {
+  let next = random(min, max, false);
+  while (next === current) {
+    next = random(min, max, false);
+  }
+  return next;
 }
